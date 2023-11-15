@@ -93,38 +93,67 @@ print('ответ на задачу 5: ', counter(n))
 
 
 #-------------------------------------- Задание 6 ---------------------------
-#6.	Напишите декоратор который выводит исключение в случае если декорируемая функция возвращает тип данных отличный от int
+# Напишите декоратор который выводит исключение в случае если декорируемая функция возвращает тип данных отличный от int
 # Напишите 2 тестовые декорируемые функции с произвольными данными.
 
 
 def deco (f):
-    def result(x, y):
-        r = list(x, y)
-#        print(r)
-    return r
-print (r)
+    def wrapper(*args, **kwargs):
+        result = f(*args, **kwargs)
+        if all(isinstance(i, int) for i in result) == True:
+            return result
+        else:
+            raise Exception('одна из функций возвращает тип данных отличный от int')
+    return wrapper
 
-
-
-
-a = 3
-b = 'hello'
 
 @deco
-def sum(c, d):                    # функция 1
-    h = list[c, d]
-    return(h)
+def sum_0(c, d):                    # функция 1
+    h = (c, d)
+    return h
 
 
-#print(sum(a, b))
+print(sum_0(2, 3))
 
-e = 5
-f = 'done'
 
 @deco
 def sum_1(c, d):                    # функция 2
-    h = list[c, d]
-    return(h)
+    h = (c, d)
+    return h
 
 
-#print(sum_1(e, f))
+print(sum_1(5, 2))
+
+
+
+
+#-------------------------------------- Задание 7 ---------------------------
+# Напишите декоратор который запускает декорируемую функцию повторно, в случае если произошло исключение при первом запуске.
+# Напишите 2 тестовые декорируемые функции с произвольными данными.
+
+
+
+
+
+
+def deco_2 (f):
+    def wrapper(*args, **kwargs):
+        result = f(*args, **kwargs)
+        try:
+            return result
+        except result <= 0:
+            print('xxx')                        #не печатает :(
+        finally:
+            return result
+    return wrapper
+
+@deco_2
+def sum_2(c,d):
+    h = c+d
+    if h > 0:
+        return h
+    else:
+        raise Exception('h must be >0')      #печатает. ощущение, что все останавливается до декоратора, так как фуекция не возвращает h, а прерывается
+
+
+print(sum_2(-4, 4))
