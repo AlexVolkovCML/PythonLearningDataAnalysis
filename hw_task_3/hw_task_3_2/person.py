@@ -5,3 +5,4 @@ class Person:
         self.surname = surname
         self.age = age
         self.gender = gender
+

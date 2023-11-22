@@ -11,3 +11,4 @@ class Teacher(Person):
         for s in students:
             s.take(edu_materials)
             self.students = self.students + 1                             # счетчик количества обученных учеников
+

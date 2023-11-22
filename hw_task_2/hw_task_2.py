@@ -113,7 +113,7 @@ def sum_0(c, d):                    # функция 1
     return h
 
 
-print(sum_0(2, 3))
+print('ответ на задачу 6: ', sum_0(2, 3))
 
 
 @deco
@@ -122,7 +122,7 @@ def sum_1(c, d):                    # функция 2
     return h
 
 
-print(sum_1(5, 2))
+print('ответ на задачу 6: ', sum_1(5, 2))
 
 
 
@@ -131,29 +131,30 @@ print(sum_1(5, 2))
 # Напишите декоратор который запускает декорируемую функцию повторно, в случае если произошло исключение при первом запуске.
 # Напишите 2 тестовые декорируемые функции с произвольными данными.
 
-
-
-
-
-
-def deco_2 (f):
+def deco_2(fn):
     def wrapper(*args, **kwargs):
-        result = f(*args, **kwargs)
         try:
+            result = fn(*args, **kwargs)
+            if type(result) != int:
+                raise Exception('Функция не возвращает целочисленное значение')
             return result
-        except result <= 0:
-            print('xxx')                        #не печатает :(
-        finally:
-            return result
+        except Exception as ex:
+            print(ex)
+            return fn(*args, **kwargs)
     return wrapper
 
+
 @deco_2
-def sum_2(c,d):
+def sum_2(c, d):
     h = c+d
-    if h > 0:
-        return h
-    else:
-        raise Exception('h must be >0')      #печатает. ощущение, что все останавливается до декоратора, так как фуекция не возвращает h, а прерывается
+    return h
 
 
-print(sum_2(-4, 4))
+@deco_2
+def sum_3(c, d):
+    h = c+d
+    return h
+
+
+print(sum_2(-4.5, 4))
+print(sum_3(-2, 4))

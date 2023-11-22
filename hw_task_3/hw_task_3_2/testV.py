@@ -19,3 +19,4 @@ print('Дисциплины студента 2: ', st2.knowledge)
 print('Дисциплины студента 3: ', st3.knowledge)
 print('Дисциплины студента 4: ', st4.knowledge)
 
+

@@ -9,3 +9,4 @@ class Educational_materials:
 
     def __len__(self):
         return len(self.Educational_materials)                  # Возвращает количество элементов в контейнере
+
